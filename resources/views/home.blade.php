@@ -33,7 +33,17 @@
                         <form method="post" action="/delete/{{$product->id}}">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger delete" id="submit">Delete</button>
+
+                            <script defer>
+                                const btn = document.querySelector('.delete')
+                                btn.addEventListener('click',(e)=>{
+                                    e.preventDefault()
+                                    if(confirm('Are you sure about deleting this product')){
+                                        console.log('hello')
+                                    }
+                                })
+                            </script>
                         </form>
                     </div>
                 </td>

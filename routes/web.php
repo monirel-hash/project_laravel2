@@ -28,4 +28,4 @@ Route::post('/products/create',[ProductController::class, 'store']);
 
 
 // delete a product
-Route::delete('/products/create',[ProductController::class, 'confirm']);
+//Route::delete('/delete/{id}',[ProductController::class, 'confirm']);
