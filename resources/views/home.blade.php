@@ -2,11 +2,19 @@
 
 @section('content')
 
-
-@unless (count($products) == 0)
-
 <div class="container">
     <h1>Product List</h1>
+
+    @if(count($products))
+
+    @if(session()->has('success'))
+    <h1>success</h1>
+    @endif
+
+    @if(session()->has('failure'))
+    <h1>failure</h1>
+    @endif
+
     <table class="table">
         <thead>
             <tr>
@@ -29,21 +37,12 @@
                 <td>
 
                     <div class="d-flex justify-content-center gap-2">
-                        <a href="" class="btn btn-primary">Edit</a>
-                        <form method="post" action="/delete/{{$product->id}}">
+                        <a href="{{ route('edit', ['id' => $product->id]) }}" class="btn btn-primary">Edit</a>
+                        <form method="post" action="/delete/{{$product->id}}" class="form">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger delete" id="submit">Delete</button>
 
-                            <script defer>
-                                const btn = document.querySelector('.delete')
-                                btn.addEventListener('click',(e)=>{
-                                    e.preventDefault()
-                                    if(confirm('Are you sure about deleting this product')){
-                                        console.log('hello')
-                                    }
-                                })
-                            </script>
                         </form>
                     </div>
                 </td>
@@ -51,12 +50,12 @@
             @endforeach
         </tbody>
     </table>
+    <div style="background-color: #f0f0f0; height: 50px; padding: 5px;">
+        {{ $products->links('pagination::bootstrap-4') }}</div>
+
+    @else
+    <h1 class="text-center text-danger">No products !!</h1>
+    @endif
 </div>
 
-@else
-<h1 class="text-center text-danger">No products !!</h1>
-
-@endunless
-
 @endsection
-

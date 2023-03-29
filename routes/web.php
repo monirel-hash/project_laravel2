@@ -18,7 +18,7 @@ use App\Http\Controllers\ProductController;
 */
 
 // shows all products
-Route::get('/',[ProductController::class, 'index']);
+Route::get('/',[ProductController::class, 'index'])->name('home');
 
 // show form to create new product
 Route::get('/products/create',[ProductController::class, 'create']);
@@ -28,4 +28,8 @@ Route::post('/products/create',[ProductController::class, 'store']);
 
 
 // delete a product
-//Route::delete('/delete/{id}',[ProductController::class, 'confirm']);
+Route::delete('/delete/{id}',[ProductController::class, 'confirm']);
+
+// edit product
+Route::get('/edit/{id}',[ProductController::class, 'edit'])->name('edit');
+Route::put('/edit/{id}',[ProductController::class, 'update'])->name('update');
