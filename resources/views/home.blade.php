@@ -4,7 +4,18 @@
 
 <div class="container">
     <h1>Product List</h1>
-
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <form method="GET" action="{{ route('home') }}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for products" name="search" value="{{ request()->query('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search">Search</i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
     @if(count($products))
 
     @if(session()->has('success'))

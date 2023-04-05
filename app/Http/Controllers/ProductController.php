@@ -20,13 +20,14 @@ class ProductController extends Controller
     //         ]
     //         );
     // }
-    public function index()
-{
-    $products = Product::paginate(10);
-    return view('home', compact('products'));
-}
 
-
+    public function index(Request $request){
+        $search = $request->query('search');
+        $products = Product::where('name', 'like', '%'.$search.'%')
+                            ->orWhere('description', 'like', '%'.$search.'%')
+                            ->paginate(10);
+        return view('home', compact('products'));
+    }
 
     // shows form for creating new product
     public function create(){
